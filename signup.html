@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>サインアップフォーム</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- カスタムカラーとフォントの定義 -->
+    <style>
+      .bg-custom {
+        background-color: #adc7c2;
+      }
+      body {
+        font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Sans",
+          "ヒラギノ角ゴシック", "Arial", "Meiryo", "メイリオ", "sans-serif";
+      }
+    </style>
+  </head>
+  <body class="bg-custom min-h-screen flex flex-col items-center justify-center space-y-4">
+    <!-- 画像のコンテナ。親要素でトリミングを指定している（overflow-hidden）。小要素でサイズ変更。object-coverで比率変えずに -->
+    <div class="rounded-lg">
+      <img
+        src="../images/kotukotu_thumbnail.png"
+        alt="サムネイルのカメの画像"
+        class="w-25 h-20 object-cover rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-2xl"
+      />
+    </div>
+
+    <!-- サインアップフォームのコンテナ -->
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <form>
+        <!-- ユーザー名の入力フィールド -->
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 font-semibold">ユーザー名</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- メールアドレスの入力フィールド -->
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-semibold">メールアドレス</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- パスワードの入力フィールド -->
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-semibold">パスワード</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- 確認用パスワードの入力フィールド 下にhiddenでエラーエッセージ-->
+        <div class="mb-6">
+          <label for="confirm_password" class="block text-gray-700 font-semibold"
+            >確認用パスワード</label
+          >
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+            required
+          />
+          <p class="text-red-500 mt-2 hidden" id="password-error">パスワードが一致しません。</p>
+        </div>
+
+        <!-- サインアップボタン -->
+        <button
+          type="submit"
+          class="w-full py-3 mt-4 text-white bg-custom rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-custom hover:bg-[#1f2c29]"
+        >
+          サインアップ
+        </button>
+      </form>
+    </div>
+
+    <!-- ログインページへのリンク -->
+    <div class="mt-4">
+      <a href="login.html" class="text-custom underline">登録済みのかたはこちら</a>
+    </div>
+
+    <!-- 確認用パスワードが違ったらエラー文を出す。 -->
+    <script>
+      document.getElementById("signup-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const password = document.getElementById("password").value;
+        const passwordConfirm = document.getElementById("password-confirm").value;
+        const passwordError = document.getElementById("password-error");
+
+        if (password !== passwordConfirm) {
+          passwordError.classList.remove("hidden");
+        } else {
+          passwordError.classList.add("hidden");
+          // ここでサーバーにデータを送信するなどの処理を書く。とりあえずコンソールログにしてる。
+          console.log("サインアップ処理を実行");
+        }
+      });
+    </script>
+  </body>
+</html>
